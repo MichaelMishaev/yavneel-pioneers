@@ -260,6 +260,7 @@ nav .btn{padding:10px 20px;font-size:15px}
 @media(max-width:860px){.join .grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
 
 
+[hidden]{display:none!important}
 .details span{white-space:pre-line}
 .adm-link{background:none;border:1px solid #0003;border-radius:99px;padding:7px 14px;font:500 13px Heebo;color:var(--green);cursor:pointer;transition:background-color .2s,transform .16s var(--out)}
 .adm-link:active{transform:scale(.96)}
@@ -310,7 +311,7 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
     החלוציות החדשה
   </a>
   <ul><li><a href="#why">החזון</a></li><li><a href="#covenant">האמנה</a></li><li><a href="#economy">כלכלת שפע</a></li><li><a href="#plan">מה מתוכנן</a></li><li><a href="#who">למי</a></li></ul>
-  <div class="side"><button class="adm-link" id="admOpen" type="button">כניסת מנהל</button><a class="btn" href="#join">רוצה להצטרף למפגש</a></div>
+  <div class="side"><a class="btn" href="#join">רוצה להצטרף למפגש</a></div>
 </div></nav>
 
 <!-- ================= HERO ================= -->
@@ -345,7 +346,7 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
   <h1 id="h1"><span class="w">החלוציות</span> <span class="w"><em>החדשה</em></span><br><span class="w">החזון</span> <span class="w">פוגש</span> <span class="w">אדמה</span></h1>
   <p class="lead">מתחילים לבנות ברית בין שבטי האחדות. אדמה לעבוד בה. קהילה להשתייך אליה. חזון להגשים יחד.</p>
   <div class="acts"><a class="btn" href="#join">רוצה להצטרף למפגש <span class="arr">←</span></a><a class="btn ghost" href="#why">להכיר את החזון</a></div>
-  <div class="facts"><span>📍 יבנאל</span><span>📅 <i data-key="date" style="font-style:normal">[תאריך מלא ושנה — לאישור]</i></span><span>🕘 <i data-key="hours" style="font-style:normal">[להשלמה]</i></span><span>🔥 יום של היכרות ועשייה</span></div>
+  <div class="facts"><span>📍 יבנאל</span><span hidden>📅 <i data-key="date" style="font-style:normal"></i></span><span hidden>🕘 <i data-key="hours" style="font-style:normal"></i></span><span>🔥 יום של היכרות ועשייה</span></div>
 </div>
 </header>
 
@@ -537,14 +538,14 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
       <rect x="62" y="218" width="176" height="20" rx="10" fill="#6b4a2c" transform="rotate(-8 150 228)"/>
       <rect x="62" y="218" width="176" height="20" rx="10" fill="#8a5a36" transform="rotate(8 150 228)"/>
     </svg>
-    <div class="details" id="details">
-      <div class="rv" style="--d:1"><b>מיקום</b><span data-key="location">יבנאל — [פרטי המקום וההגעה]</span></div>
-      <div class="rv" style="--d:2"><b>תאריך</b><span data-key="date">[תאריך מלא ושנה — לאישור]</span></div>
-      <div class="rv" style="--d:3"><b>שעות</b><span data-key="hours">[להשלמה]</span></div>
-      <div class="rv" style="--d:4"><b>עלות והסדרי השתתפות</b><span data-key="cost">[להשלמה]</span></div>
-      <div class="rv" style="--d:5"><b>מה להביא</b><span data-key="bring">[להשלמה בהתאם לפעילות]</span></div>
-      <div class="rv" style="--d:6"><b>הגעה עם ילדים, נגישות ולינה</b><span data-key="access">[פרטים להשלמה]</span></div>
-      <div class="rv" style="--d:7"><b>ליצירת קשר</b><span data-key="contact">[שם וטלפון]</span></div>
+    <div class="details" id="details" hidden>
+      <div class="rv" style="--d:1" hidden><b>מיקום</b><span data-key="location"></span></div>
+      <div class="rv" style="--d:2" hidden><b>תאריך</b><span data-key="date"></span></div>
+      <div class="rv" style="--d:3" hidden><b>שעות</b><span data-key="hours"></span></div>
+      <div class="rv" style="--d:4" hidden><b>עלות והסדרי השתתפות</b><span data-key="cost"></span></div>
+      <div class="rv" style="--d:5" hidden><b>מה להביא</b><span data-key="bring"></span></div>
+      <div class="rv" style="--d:6" hidden><b>הגעה עם ילדים, נגישות ולינה</b><span data-key="access"></span></div>
+      <div class="rv" style="--d:7" hidden><b>ליצירת קשר</b><span data-key="contact"></span></div>
     </div>
   </div>
 
@@ -757,9 +758,11 @@ const MAIL_TO='zarina1990@gmail.com', MAIL_CC='345287@gmail.com';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const KEYS=['location','date','hours','cost','bring','access','contact'];       // the ONLY editable fields
 const LABEL={location:'מיקום',date:'תאריך',hours:'שעות',cost:'עלות והסדרי השתתפות',bring:'מה להביא',access:'הגעה עם ילדים, נגישות ולינה',contact:'ליצירת קשר'};
-const defaults={};$$('[data-key]').forEach(n=>{if(!(n.dataset.key in defaults))defaults[n.dataset.key]=n.textContent});
-let vals={...defaults};
-const paint=()=>$$('[data-key]').forEach(n=>{if(n.tagName!=='TEXTAREA')n.textContent=vals[n.dataset.key]??''});
+let vals=Object.fromEntries(KEYS.map(k=>[k,'']));
+const paint=()=>{
+  $$('[data-key]').forEach(n=>{if(n.tagName==='TEXTAREA')return;const v=vals[n.dataset.key]??'';n.textContent=v;const w=n.closest('.details>div, .facts>span');if(w)w.hidden=!v});
+  $('#details').hidden=!KEYS.some(k=>vals[k])};
+paint();
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)};
 
 /* ---------- details come from details.json (same site, no server) ---------- */
@@ -782,7 +785,8 @@ window.REG={async send(data){
 const modal=$('#admModal'),msg=$('#admMsg'),bar=$('#admbar');
 const openM=()=>{if(document.body.classList.contains('admin'))return;modal.classList.add('show');msg.textContent='';$('#admEmail').focus()};
 const closeM=()=>modal.classList.remove('show');
-$('#admOpen').onclick=openM;
+if(location.hash==='#admin')openM();
+addEventListener('hashchange',()=>{if(location.hash==='#admin')openM()});
 $('#admCancel').onclick=closeM;
 modal.addEventListener('click',e=>{if(e.target===modal)closeM()});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
@@ -794,10 +798,11 @@ $('#admForm').addEventListener('submit',e=>{
   closeM();enterAdmin()});
 function enterAdmin(){
   document.body.classList.add('admin');bar.classList.add('show');
-  $$('#details [data-key]').forEach(n=>{const t=document.createElement('textarea');t.className='ed';t.dataset.key=n.dataset.key;t.value=vals[n.dataset.key]??'';t.rows=1;t.setAttribute('aria-label',LABEL[n.dataset.key]);n.replaceWith(t)});
+  $('#details').hidden=false;
+  $$('#details [data-key]').forEach(n=>{n.closest('.details>div').hidden=false;const t=document.createElement('textarea');t.placeholder=LABEL[n.dataset.key];t.className='ed';t.dataset.key=n.dataset.key;t.value=vals[n.dataset.key]??'';t.rows=1;t.setAttribute('aria-label',LABEL[n.dataset.key]);n.replaceWith(t)});
   $('#details').scrollIntoView({block:'center'})}
 function leaveAdmin(){
-  document.body.classList.remove('admin');bar.classList.remove('show');
+  document.body.classList.remove('admin');bar.classList.remove('show');history.replaceState(null,'',location.pathname);
   $$('#details textarea.ed').forEach(t=>{const n=document.createElement('span');n.dataset.key=t.dataset.key;n.textContent=vals[t.dataset.key]??'';t.replaceWith(n)});paint()}
 $('#admOut').onclick=()=>{leaveAdmin();toast('התנתקת')};
 const collect=()=>{const o={};$$('#details textarea.ed').forEach(t=>{if(KEYS.includes(t.dataset.key))o[t.dataset.key]=t.value.trim().slice(0,400)});return o};
