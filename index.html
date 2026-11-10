@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>החלוציות החדשה — החזון פוגש אדמה | מפגש חלוצים ביבנאל</title>
+<meta name="description" content="מפגש חלוצים ביבנאל: אדמה לעבוד בה, קהילה להשתייך אליה, חזון להגשים יחד. מתחילים לבנות ברית בין שבטי האחדות.">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#f6efdf; --sand2:#efe5cc; --ink:#1f2a18; --green:#2f5226; --olive:#4f7a3c; --sage:#b9c9a3;
+  --clay:#c4552d; --gold:#e9a23b; --night:#1a2116;
+  --out:cubic-bezier(.23,1,.32,1); --inout:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Heebo,system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.7;font-size:18px;overflow-x:hidden}
+.serif{font-family:'Frank Ruhl Libre',serif}
+h1,h2,h3{font-family:'Frank Ruhl Libre',serif;line-height:1.12;font-weight:700}
+h2{font-size:clamp(34px,5vw,56px);color:var(--green)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+section{position:relative}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:99px;background:var(--clay);color:#fff;font:700 18px Heebo;border:0;cursor:pointer;text-decoration:none;
+  transition:transform .16s var(--out),box-shadow .2s var(--out),background-color .2s;box-shadow:0 10px 26px -10px #c4552d99}
+.btn:active{transform:scale(.97)}
+@media(hover:hover) and (pointer:fine){.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -10px #c4552daa}.btn:hover .arr{transform:translateX(-5px)}}
+.btn .arr{transition:transform .2s var(--out)}
+.btn.ghost{background:transparent;color:var(--green);box-shadow:none;border:2px solid var(--green)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background-color .3s,box-shadow .3s,transform .3s var(--out)}
+nav.solid{background:#f6efdfee;backdrop-filter:blur(10px);box-shadow:0 1px 0 #0001}
+nav .in{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1240px;margin:auto}
+nav .logo{font:900 22px 'Frank Ruhl Libre',serif;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:8px}
+nav ul{display:flex;gap:26px;list-style:none;font-size:15px;font-weight:500}
+nav ul a{text-decoration:none;opacity:.8;transition:opacity .15s}
+nav ul a:hover{opacity:1}
+nav .btn{padding:10px 20px;font-size:15px}
+@media(max-width:860px){nav ul,nav .btn{display:none}}
+
+/* ---------- hero ---------- */
+.hero{height:100vh;min-height:680px;max-height:980px;overflow:hidden;background:linear-gradient(#fbd9a6 0%,#fdeccb 38%,#f6efdf 70%)}
+.hero svg.scene{position:absolute;inset:0;width:100%;height:100%}
+.hero .copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:100px 28px 0;max-width:1120px;margin:auto;z-index:5}
+.eyebrow{font:500 14px/1 Heebo;letter-spacing:.12em;color:var(--clay);text-transform:uppercase;margin-bottom:18px;display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:36px;height:2px;background:var(--clay)}
+.hero h1{font-size:clamp(44px,7.4vw,100px);color:var(--green);max-width:760px;font-weight:900}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(34px);animation:up .9s var(--out) forwards}
+.hero h1 em{font-style:normal;color:var(--clay)}
+.hero .lead{font-size:clamp(18px,2vw,22px);max-width:520px;margin:22px 0 30px;color:#3a4a2e;opacity:0;animation:up .9s .8s var(--out) forwards}
+.hero .acts{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:up .9s 1s var(--out) forwards}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;opacity:0;animation:up .9s 1.2s var(--out) forwards}
+.facts span{background:#fff9;backdrop-filter:blur(6px);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:500;border:1px solid #0001}
+@keyframes up{to{opacity:1;transform:none}}
+.scroll-hint{position:absolute;bottom:18px;left:50%;translate:-50% 0;z-index:6;font-size:12px;letter-spacing:.2em;color:#fff;display:flex;flex-direction:column;align-items:center;gap:6px}
+.scroll-hint i{width:2px;height:34px;background:linear-gradient(#fff,#fff0);animation:drip 1.8s var(--inout) infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* scene animation */
+.sun{animation:sunrise 2.6s var(--out) both}
+@keyframes sunrise{from{transform:translateY(150px);opacity:.2}to{transform:none;opacity:1}}
+.rays{transform-origin:center;transform-box:fill-box;animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cloud{animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-14vw)}to{transform:translateX(120vw)}}
+.bird{animation:fly 22s linear infinite}
+@keyframes fly{from{transform:translate(0,0)}to{transform:translate(-1500px,-90px)}}
+.wing{animation:flap .5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center bottom}
+@keyframes flap{to{transform:scaleY(.4)}}
+.sprout{transform-box:fill-box;transform-origin:50% 100%;transform:scale(0);animation:grow 1.1s var(--out) forwards;animation-delay:calc(1.1s + var(--i)*45ms)}
+@keyframes grow{to{transform:scale(1)}}
+.sway{animation:sway 4s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-300ms);transform-box:fill-box;transform-origin:50% 100%}
+@keyframes sway{from{rotate:-4deg}to{rotate:4deg}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--green);color:var(--sand);overflow:hidden;padding:18px 0;white-space:nowrap}
+.marquee div{display:inline-flex;gap:50px;animation:mq 30s linear infinite;font:500 26px 'Frank Ruhl Libre',serif}
+.marquee span::after{content:"✦";margin-right:50px;color:var(--gold)}
+@keyframes mq{to{transform:translateX(50%)}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s var(--out),transform .8s var(--out);transition-delay:calc(var(--d,0)*70ms)}
+.rv.in{opacity:1;transform:none}
+.pad{padding:120px 0}
+
+/* ---------- intro / why ---------- */
+.intro .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center}
+.intro p{margin-bottom:18px;color:#3a4a2e}
+.intro p.big{font:500 26px/1.5 'Frank Ruhl Libre',serif;color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.stat{background:#fff;border-radius:18px;padding:20px 16px;text-align:center;box-shadow:0 14px 30px -18px #3a2d1a66}
+.stat b{display:block;font:900 52px/1 'Frank Ruhl Libre',serif;color:var(--clay);direction:ltr;unicode-bidi:isolate}
+.stat span{font-size:14px;color:#555}
+.art{aspect-ratio:1/1;border-radius:28px;background:linear-gradient(160deg,#dbe6c8,#f3e2bd);position:relative;overflow:hidden}
+.art svg{width:100%;height:100%}
+@media(max-width:860px){.intro .grid,.two{grid-template-columns:1fr!important;gap:40px}}
+
+/* ---------- pillars ---------- */
+.pillars{background:var(--sand2)}
+.pillars h2{text-align:center;margin-bottom:12px}
+.pillars .sub{text-align:center;max-width:640px;margin:0 auto 60px;color:#4a5a3c}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pc{background:#fff;border-radius:26px;padding:34px 28px;position:relative;overflow:hidden;transition:transform .35s var(--out),box-shadow .35s var(--out)}
+@media(hover:hover) and (pointer:fine){.pc:hover{transform:translateY(-8px);box-shadow:0 30px 50px -26px #2f522688}.pc:hover svg{transform:scale(1.08) rotate(-3deg)}}
+.pc svg{width:84px;height:84px;margin-bottom:18px;transition:transform .45s var(--out)}
+.pc h3{font-size:30px;color:var(--green);margin-bottom:6px}
+.pc p{font-size:16px;color:#555}
+.quote{margin:70px auto 0;max-width:860px;text-align:center;font:500 clamp(26px,4vw,42px)/1.3 'Frank Ruhl Libre',serif;color:var(--green)}
+.quote em{font-style:normal;color:var(--clay)}
+@media(max-width:860px){.pcards{grid-template-columns:1fr}}
+
+/* ---------- covenant ---------- */
+.cov .two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.net{aspect-ratio:1/1;background:var(--night);border-radius:28px;position:relative;overflow:hidden}
+.net svg{width:100%;height:100%}
+.net line{stroke:var(--gold);stroke-width:2;stroke-linecap:round;opacity:.7;stroke-dasharray:var(--l);stroke-dashoffset:var(--l);transition:stroke-dashoffset 1.4s var(--inout);transition-delay:calc(var(--i)*140ms + .3s)}
+.net.in line{stroke-dashoffset:0}
+.net circle.n{fill:var(--sage);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .7s var(--out);transition-delay:calc(var(--i)*110ms)}
+.net.in circle.n{transform:scale(1);animation:pulse 3s ease-in-out infinite;animation-delay:calc(var(--i)*-400ms + 1.5s)}
+.net circle.halo{fill:none;stroke:var(--sage);opacity:0}
+.net.in circle.halo{animation:halo 3s ease-out infinite;animation-delay:calc(var(--i)*-400ms + 1.5s)}
+@keyframes pulse{50%{transform:scale(1.18)}}
+@keyframes halo{0%{opacity:.5;r:10}100%{opacity:0;r:34}}
+.net .center{fill:var(--gold)}
+.qs{list-style:none;margin-top:22px;display:grid;gap:10px}
+.qs li{background:#fff;border-radius:16px;padding:14px 18px 14px 14px;display:flex;gap:14px;align-items:center;font-size:16px;font-weight:500;transition:transform .25s var(--out),background-color .25s}
+@media(hover:hover) and (pointer:fine){.qs li:hover{transform:translateX(-6px);background:#fff4dc}}
+.qs i{flex:0 0 34px;height:34px;border-radius:50%;background:var(--olive);color:#fff;display:grid;place-items:center;font:700 15px Heebo;font-style:normal}
+.cov .note{margin-top:20px;font-weight:500;color:var(--clay)}
+
+/* ---------- economy ---------- */
+.eco{background:var(--green);color:var(--sand);overflow:hidden}
+.eco h2{color:var(--sand)}
+.eco .top{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.eco p{color:#d7dfc9;margin-top:16px}
+.orbit{aspect-ratio:1/1;position:relative;max-width:480px;margin:auto;width:100%}
+.orbit .core{position:absolute;inset:34%;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;text-align:center;font:900 22px/1.1 'Frank Ruhl Libre',serif;box-shadow:0 0 0 0 #e9a23b88;animation:core 3.2s ease-out infinite}
+@keyframes core{70%,100%{box-shadow:0 0 0 40px #e9a23b00}}
+.orbit .ring{position:absolute;inset:0;animation:spin 40s linear infinite}
+.orbit .item{position:absolute;top:50%;left:50%;width:84px;height:84px;margin:-42px;border-radius:50%;background:var(--sand);color:var(--green);display:grid;place-items:center;font:700 15px Heebo;text-align:center;
+  transform:rotate(calc(var(--i)*60deg)) translateY(-205px) rotate(calc(var(--i)*-60deg))}
+.orbit .item span{display:block;animation:spinr 40s linear infinite}
+@keyframes spinr{to{transform:rotate(-360deg)}}
+.orbit .item b{display:block;font-size:26px;line-height:1}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:70px}
+.opt{background:#ffffff12;border:1px solid #ffffff22;border-radius:20px;padding:24px;transition:background-color .3s,transform .35s var(--out)}
+@media(hover:hover) and (pointer:fine){.opt:hover{background:#ffffff22;transform:translateY(-6px)}}
+.opt b{display:block;font:700 22px 'Frank Ruhl Libre',serif;margin-bottom:4px;color:var(--gold)}
+.opt p{margin:0;font-size:15px}
+.eco .closing{margin-top:50px;font:500 28px/1.4 'Frank Ruhl Libre',serif;color:var(--sand);max-width:760px}
+@media(max-width:860px){.eco .top{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.orbit .item{width:64px;height:64px;margin:-32px;font-size:12px;transform:rotate(calc(var(--i)*60deg)) translateY(-140px) rotate(calc(var(--i)*-60deg))}.orbit .item b{font-size:20px}}
+
+/* ---------- children ---------- */
+.kids .two{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.kids .art{background:linear-gradient(#c7e1ee,#e9f1d4)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips span{background:#fff;padding:10px 18px;border-radius:99px;font-weight:500;font-size:16px;box-shadow:0 6px 16px -10px #0006}
+
+/* ---------- timeline ---------- */
+.plan{background:var(--sand2)}
+.plan h2{text-align:center}
+.plan .sub{text-align:center;margin:10px 0 70px;color:#4a5a3c}
+.tl{position:relative;max-width:760px;margin:auto;padding-right:70px}
+.tl::before{content:"";position:absolute;right:26px;top:0;bottom:0;width:4px;border-radius:4px;background:#0001}
+.tl .fill{position:absolute;right:26px;top:0;width:4px;border-radius:4px;background:linear-gradient(var(--olive),var(--clay));height:var(--p,0%);transition:height .15s linear}
+.st{position:relative;padding:0 0 46px;opacity:.35;transition:opacity .5s var(--out)}
+.st.on{opacity:1}
+.st .dot{position:absolute;right:-70px;top:0;width:56px;height:56px;border-radius:50%;background:var(--sand2);border:4px solid #0002;display:grid;place-items:center;font:900 22px 'Frank Ruhl Libre',serif;color:#0005;transition:all .5s var(--out)}
+.st.on .dot{background:var(--olive);border-color:var(--olive);color:#fff;transform:scale(1.1) rotate(360deg)}
+.st h3{font-size:30px;color:var(--green);padding-top:6px}
+.st p{color:#4a5a3c;font-size:17px;margin-top:4px}
+
+/* ---------- who ---------- */
+.who{text-align:center}
+.who h2{margin-bottom:34px}
+.cloud-chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:900px;margin:0 auto}
+.cloud-chips span{padding:12px 22px;border-radius:99px;font-weight:500;background:#fff;box-shadow:0 8px 20px -12px #0007;transition:transform .3s var(--out),background-color .3s,color .3s;animation:bob 5s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-700ms)}
+.cloud-chips span:nth-child(3n){background:var(--sage)}
+.cloud-chips span:nth-child(3n+1){background:#f6dcc0}
+@keyframes bob{to{transform:translateY(-7px)}}
+@media(hover:hover) and (pointer:fine){.cloud-chips span:hover{background:var(--olive);color:#fff}}
+.who .welcome{margin:40px auto 0;max-width:620px;color:#4a5a3c;font-size:20px}
+.who .welcome b{color:var(--clay)}
+
+/* ---------- outcomes ---------- */
+.out{background:#fff}
+.out .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:50px}
+.oc{border-radius:22px;padding:28px 22px;background:var(--sand);position:relative;overflow:hidden;min-height:190px}
+.oc b{position:absolute;left:14px;bottom:-16px;font:900 120px/1 'Frank Ruhl Libre',serif;color:#4f7a3c1a}
+.oc p{position:relative;font-weight:500;font-size:17px;line-height:1.5}
+.out .fine{margin-top:34px;padding:20px 24px;border-radius:16px;background:#fff6e4;border:1px dashed var(--gold);font-size:15px;color:#5a4a28}
+@media(max-width:860px){.out .grid{grid-template-columns:1fr 1fr}}
+
+/* ---------- network (tribes) ---------- */
+.uh{background:var(--sage);text-align:center}
+.uh h2{margin-bottom:12px}
+.uh .tag{font:500 28px 'Frank Ruhl Libre',serif;color:var(--green);margin-top:18px}
+
+/* ---------- join + fire ---------- */
+.join{background:linear-gradient(var(--night),#0f140d);color:var(--sand);overflow:hidden}
+.join::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 100%,#e9a23b33,transparent 70%)}
+.join .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;position:relative}
+.join h2{color:var(--sand);margin-bottom:16px}
+.join .lead{color:#cfd6c0;margin-bottom:26px}
+.fire{width:100%;max-width:340px;margin:26px 0 8px}
+.details{display:grid;gap:10px;margin-top:22px;font-size:15px}
+.details div{display:flex;gap:12px;background:#ffffff0d;border-radius:12px;padding:10px 14px}
+.details b{flex:0 0 118px;color:var(--gold);font-weight:700}
+.details span{color:#cfd6c0}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .7s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.23s)}
+@keyframes flick{0%{transform:scale(1,1) skewX(-3deg)}100%{transform:scale(.88,1.12) skewX(4deg)}}
+.spark{animation:spark 2.6s ease-out infinite;animation-delay:var(--dl);opacity:0}
+@keyframes spark{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx),-170px);opacity:0}}
+
+/* form */
+.card{background:var(--sand);color:var(--ink);border-radius:28px;padding:34px;box-shadow:0 40px 80px -30px #000a;position:relative;overflow:hidden}
+.prog{display:flex;gap:6px;margin-bottom:8px}
+.prog i{flex:1;height:5px;border-radius:5px;background:#0002;overflow:hidden;position:relative}
+.prog i::after{content:"";position:absolute;inset:0;background:var(--olive);transform-origin:right;transform:scaleX(0);transition:transform .5s var(--out)}
+.prog i.on::after{transform:scaleX(1)}
+.stepno{font-size:13px;color:#777;margin-bottom:18px}
+.step{display:none}
+.step.show{display:block;animation:stepin .45s var(--out)}
+.step.back.show{animation-name:stepinb}
+@keyframes stepin{from{opacity:0;transform:translateX(-28px)}}
+@keyframes stepinb{from{opacity:0;transform:translateX(28px)}}
+.q{font:700 28px/1.2 'Frank Ruhl Libre',serif;color:var(--green);margin-bottom:4px}
+.hint{font-size:15px;color:#666;margin-bottom:18px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.fld input,.fld textarea{width:100%;font:400 17px Heebo;padding:13px 14px;border:2px solid #0002;border-radius:12px;background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s;outline:none}
+.fld input:focus,.fld textarea:focus{border-color:var(--olive);box-shadow:0 0 0 4px #4f7a3c22}
+.fld.err input{border-color:var(--clay);animation:shake .35s}
+.fld .em{color:var(--clay);font-size:13px;min-height:0;display:none;margin-top:4px}
+.fld.err .em{display:block}
+@keyframes shake{25%{transform:translateX(5px)}75%{transform:translateX(-5px)}}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opts2{display:flex;flex-wrap:wrap;gap:10px}
+.opts2 input{position:absolute;opacity:0;pointer-events:none}
+.opts2 label{padding:11px 18px;border-radius:99px;background:#fff;border:2px solid #0002;font-weight:500;font-size:16px;cursor:pointer;user-select:none;transition:transform .15s var(--out),background-color .2s,color .2s,border-color .2s;display:inline-flex;gap:8px;align-items:center}
+.opts2 label:active{transform:scale(.95)}
+.opts2 label::before{content:"+";font-weight:700;transition:transform .25s var(--out)}
+.opts2 input:checked+label{background:var(--olive);border-color:var(--olive);color:#fff;animation:pop .3s var(--out)}
+.opts2 input:checked+label::before{content:"✓"}
+.opts2 input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+@keyframes pop{50%{transform:scale(1.07)}}
+.nav2{display:flex;align-items:center;gap:14px;margin-top:24px}
+.nav2 .btn{padding:14px 30px}
+.nav2 .bk{background:none;border:0;font:500 15px Heebo;color:#666;cursor:pointer;padding:10px}
+.skip{font-size:13px;color:#777;margin-top:12px}
+.done{text-align:center;padding:10px 0}
+.done svg{width:170px;height:170px}
+.done h3{font-size:34px;color:var(--green);margin:6px 0}
+.done .stem{stroke-dasharray:120;stroke-dashoffset:120;animation:draw 1s .1s var(--out) forwards}
+.done .lf{transform-box:fill-box;transform-origin:0 100%;transform:scale(0);animation:grow .7s var(--out) forwards;animation-delay:calc(.8s + var(--i)*.18s)}
+.done .lfr{transform-origin:100% 100%}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hp{position:absolute;left:-9999px}
+@media(max-width:860px){.join .grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+
+
+.details span{white-space:pre-line}
+.adm-link{background:none;border:1px solid #0003;border-radius:99px;padding:7px 14px;font:500 13px Heebo;color:var(--green);cursor:pointer;transition:background-color .2s,transform .16s var(--out)}
+.adm-link:active{transform:scale(.96)}
+.adm-link:hover{background:#0001}
+nav .in .side{display:flex;gap:10px;align-items:center}
+.admbar{position:fixed;inset:0 0 auto 0;z-index:80;background:#1f2a18;color:#f6efdf;display:flex;gap:12px;align-items:center;justify-content:center;padding:10px 16px;font-size:14px;flex-wrap:wrap;transform:translateY(-100%);transition:transform .35s var(--out)}
+.admbar.show{transform:none}
+.admbar button{font:700 14px Heebo;border:0;border-radius:99px;padding:8px 18px;cursor:pointer;background:var(--gold);color:#1a2116}
+.admbar button.o{background:#ffffff22;color:#fff}
+.admbar span{opacity:.8}
+body.admin nav{top:46px}
+.details .ed{width:100%;font:400 15px Heebo;border:2px solid var(--gold);background:#ffffff14;color:#fff;border-radius:8px;padding:6px 10px;resize:vertical;min-height:38px;outline:none}
+.modal{position:fixed;inset:0;z-index:90;background:#000a;display:none;place-items:center;padding:20px}
+.modal.show{display:grid;animation:fadein .2s ease-out}
+@keyframes fadein{from{opacity:0}}
+.modal .box{background:var(--sand);border-radius:22px;padding:28px;width:100%;max-width:400px;box-shadow:0 40px 80px -30px #000;animation:stepin .35s var(--out)}
+.modal h3{font-size:26px;color:var(--green);margin-bottom:14px}
+.modal .row{display:flex;gap:10px;margin-top:18px}
+.modal .row .btn{padding:12px 24px;font-size:16px}
+.modal .row button.bk{background:none;border:0;cursor:pointer;color:#666;font:500 15px Heebo}
+.modal .msg{color:var(--clay);font-size:14px;margin-top:10px;min-height:20px}
+.toast{position:fixed;bottom:24px;left:50%;translate:-50% 0;background:#1f2a18;color:#fff;padding:12px 22px;border-radius:99px;z-index:100;font-size:15px;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s var(--out);pointer-events:none}
+.toast.show{opacity:1;transform:none}
+footer{background:#0f140d;color:#9aa58b;text-align:center;padding:40px 20px;font-size:14px}
+footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;margin-bottom:6px}
+
+/* sticky mobile cta */
+.mcta{position:fixed;bottom:14px;right:14px;left:14px;z-index:60;display:none;justify-content:center;transform:translateY(120px);transition:transform .4s var(--out)}
+.mcta.show{transform:none}
+@media(max-width:860px){.mcta{display:flex}.mcta .btn{width:100%;justify-content:center}}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01s!important;animation-iteration-count:1!important;animation-delay:0s!important}
+  .rv{transform:none;transition:opacity .3s}
+  .marquee div,.cloud,.bird,.rays,.orbit .ring{animation:none!important}
+  .sprout{transform:scale(1)}
+  .hero h1 .w,.hero .lead,.hero .acts,.facts{opacity:1;transform:none}
+  .net line{stroke-dashoffset:0;transition:none}.net circle.n{transform:scale(1)}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="in">
+  <a class="logo" href="#top">
+    <svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="15" fill="#4f7a3c"/><path d="M15 24V13M15 15c0-4 3-6 7-6 0 4-3 6-7 6zM15 18c0-3-2-5-6-5 0 3 2 5 6 5z" fill="none" stroke="#f6efdf" stroke-width="2" stroke-linecap="round"/></svg>
+    החלוציות החדשה
+  </a>
+  <ul><li><a href="#why">החזון</a></li><li><a href="#covenant">האמנה</a></li><li><a href="#economy">כלכלת שפע</a></li><li><a href="#plan">מה מתוכנן</a></li><li><a href="#who">למי</a></li></ul>
+  <div class="side"><button class="adm-link" id="admOpen" type="button">כניסת מנהל</button><a class="btn" href="#join">רוצה להצטרף למפגש</a></div>
+</div></nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+<svg class="scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <radialGradient id="sg"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#ffcf70" stop-opacity="0"/></radialGradient>
+    <linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cdd9a8"/><stop offset="1" stop-color="#a9bf86"/></linearGradient>
+    <linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db878"/><stop offset="1" stop-color="#7f9d5c"/></linearGradient>
+    <linearGradient id="h3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f8545"/><stop offset="1" stop-color="#3d6230"/></linearGradient>
+  </defs>
+  <g data-par="0.05"><g class="sun" style="transform-origin:300px 420px">
+    <circle cx="300" cy="420" r="230" fill="url(#sg)"/>
+    <g class="rays" stroke="#ffd98a" stroke-width="5" stroke-linecap="round" opacity=".8" id="rays"></g>
+    <circle cx="300" cy="420" r="82" fill="#ffd36b"/>
+  </g></g>
+  <g data-par="0.12" fill="#fff" opacity=".9">
+    <g class="cloud" style="animation-duration:90s;animation-delay:-30s"><ellipse cx="200" cy="210" rx="90" ry="22"/><ellipse cx="260" cy="196" rx="52" ry="26"/></g>
+    <g class="cloud" style="animation-duration:120s;animation-delay:-80s"><ellipse cx="760" cy="150" rx="110" ry="24"/><ellipse cx="830" cy="134" rx="56" ry="28"/></g>
+    <g class="cloud" style="animation-duration:100s;animation-delay:-10s"><ellipse cx="1100" cy="260" rx="80" ry="18"/><ellipse cx="1150" cy="248" rx="40" ry="20"/></g>
+  </g>
+  <g class="bird" style="transform:translate(1450px,200px)"><g transform="translate(1450 200)" fill="none" stroke="#3b4a2f" stroke-width="3" stroke-linecap="round"><path class="wing" d="M0 0q10-12 20 0"/><path class="wing" d="M20 0q10-12 20 0"/></g></g>
+  <g class="bird" style="animation-delay:-8s"><g transform="translate(1500 280) scale(.7)" fill="none" stroke="#3b4a2f" stroke-width="3" stroke-linecap="round"><path class="wing" d="M0 0q10-12 20 0"/><path class="wing" d="M20 0q10-12 20 0"/></g></g>
+  <g data-par="0.2"><path d="M0 640 Q240 540 520 610 T1060 590 T1440 620 V900H0Z" fill="url(#h1)"/></g>
+  <g data-par="0.35"><path d="M0 720 Q300 630 620 700 T1200 680 T1440 710 V900H0Z" fill="url(#h2)"/>
+    <g id="farRows" stroke="#6c8c4d" stroke-width="2" opacity=".6"></g></g>
+  <g data-par="0.55"><path d="M0 790 Q360 730 720 785 T1440 770 V900H0Z" fill="url(#h3)"/><g id="crops"></g></g>
+</svg>
+
+<div class="copy">
+  <div class="eyebrow">מפגש חלוצים ביבנאל</div>
+  <h1 id="h1"><span class="w">החלוציות</span> <span class="w"><em>החדשה</em></span><br><span class="w">החזון</span> <span class="w">פוגש</span> <span class="w">אדמה</span></h1>
+  <p class="lead">מתחילים לבנות ברית בין שבטי האחדות. אדמה לעבוד בה. קהילה להשתייך אליה. חזון להגשים יחד.</p>
+  <div class="acts"><a class="btn" href="#join">רוצה להצטרף למפגש <span class="arr">←</span></a><a class="btn ghost" href="#why">להכיר את החזון</a></div>
+  <div class="facts"><span>📍 יבנאל</span><span>📅 <i data-key="date" style="font-style:normal">[תאריך מלא ושנה — לאישור]</i></span><span>🕘 <i data-key="hours" style="font-style:normal">[להשלמה]</i></span><span>🔥 יום של היכרות ועשייה</span></div>
+</div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div><span>אדמה לעבוד בה</span><span>קהילה להשתייך אליה</span><span>חזון להגשים יחד</span><span>אחדות שאינה אחידות</span><span>אדם אינו מעל אדם</span><span>אדמה לעבוד בה</span><span>קהילה להשתייך אליה</span><span>חזון להגשים יחד</span><span>אחדות שאינה אחידות</span><span>אדם אינו מעל אדם</span></div></div>
+
+<!-- ================= WHY ================= -->
+<section class="intro pad" id="why"><div class="wrap grid">
+  <div>
+    <div class="eyebrow rv">למה עכשיו</div>
+    <h2 class="rv" style="--d:1">יש אנשים שכבר שנים נושאים חלום</h2>
+    <p class="big rv" style="--d:2;margin-top:22px">לחיות קרוב לאדמה, לגדל ילדים בסביבה מיטיבה, ליצור פרנסה שיש בה משמעות ולהיות חלק מקהילה של ערבות הדדית.</p>
+    <p class="rv" style="--d:3">יש בעלי אדמות שמבקשים להחיות אותן. יש משפחות שמחפשות שייכות. יש אנשי מעשה, חינוך, ריפוי ויצירה, המבקשים להביא את יכולותיהם למקום שבו יוכלו לצמוח ולהועיל.</p>
+    <p class="rv" style="--d:4">אנחנו מזמינות אתכם להיפגש ביבנאל — להכיר, לעבוד את האדמה ולהתחיל לחבר בין האנשים, המקומות והכלים שיכולים להפוך את החלום לדרך חיים.</p>
+    <div class="stats">
+      <div class="stat rv" style="--d:5"><b data-to="5">0</b><span>תחנות ביום</span></div>
+      <div class="stat rv" style="--d:6"><b data-to="6">0</b><span>שאלות לאמנה</span></div>
+      <div class="stat rv" style="--d:7"><b data-to="4">0</b><span>צעדי המשך</span></div>
+    </div>
+  </div>
+  <div class="art rv" style="--d:2">
+    <svg viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="300" cy="90" r="46" fill="#ffd36b"/>
+      <path d="M0 270 Q120 220 240 260 T400 250 V400H0Z" fill="#a9bf86"/>
+      <path d="M0 320 Q150 280 300 315 T400 305 V400H0Z" fill="#4f7a3c"/>
+      <!-- hands + sprout -->
+      <g transform="translate(200 300)">
+        <path d="M-90 40c10-30 40-40 90-40s80 10 90 40c-30 10-60 14-90 14s-60-4-90-14z" fill="#d8a77a"/>
+        <path d="M-60 30c15-10 40-12 60-12s45 2 60 12" fill="none" stroke="#b98558" stroke-width="3" stroke-linecap="round"/>
+        <g class="sway" style="--i:1"><path d="M0 18V-70" stroke="#2f5226" stroke-width="6" stroke-linecap="round"/>
+        <path d="M0-30C0-60 24-76 56-72 56-44 34-28 0-30z" fill="#6d8f52"/>
+        <path d="M0-52C0-76-22-88-50-84-50-60-30-48 0-52z" fill="#4f7a3c"/>
+        <path d="M0-72c-6-14 0-26 8-32 8 8 8 22 0 32z" fill="#8fb066"/></g>
+      </g>
+      <g fill="#fff"><circle cx="70" cy="130" r="3"><animate attributeName="cy" values="130;110;130" dur="4s" repeatCount="indefinite"/></circle><circle cx="120" cy="90" r="2"><animate attributeName="cy" values="90;70;90" dur="5s" repeatCount="indefinite"/></circle><circle cx="340" cy="190" r="3"><animate attributeName="cy" values="190;170;190" dur="3.5s" repeatCount="indefinite"/></circle></g>
+    </svg>
+  </div>
+</div></section>
+
+<!-- ================= WHAT TO GROW ================= -->
+<section class="pillars pad" id="grow"><div class="wrap">
+  <h2 class="rv">מה אנחנו מבקשות להצמיח?</h2>
+  <p class="sub rv" style="--d:1">קהילות שבהן ״ואהבת לרעך כמוך״ מקבלת ביטוי בחיי היום־יום: בדרך שבה מגדלים ילדים, עובדים, מתפרנסים, מקבלים החלטות ודואגים זה לזה. זהו לב חזון המאסף — תקומת התנועה השבטית החדשה.</p>
+  <div class="pcards">
+    <div class="pc rv" style="--d:1">
+      <svg viewBox="0 0 84 84"><circle cx="30" cy="42" r="22" fill="#b9c9a3"/><circle cx="54" cy="42" r="22" fill="#f1c9a3" style="mix-blend-mode:multiply"/><path d="M42 26a22 22 0 0 1 0 32 22 22 0 0 1 0-32z" fill="#4f7a3c"/></svg>
+      <h3>ערבות</h3><p>קהילות וקבוצות שנקשרות זו לזו ונושאות יחד באחריות, בארץ ובעולם.</p></div>
+    <div class="pc rv" style="--d:2">
+      <svg viewBox="0 0 84 84"><path d="M12 62c0-24 14-40 30-40s30 16 30 40" fill="none" stroke="#c4552d" stroke-width="6" stroke-linecap="round"/><circle cx="42" cy="22" r="9" fill="#e9a23b"/><path d="M14 66h56" stroke="#2f5226" stroke-width="6" stroke-linecap="round"/></svg>
+      <h3>חירות</h3><p>לכל אדם קול, גבולות מכובדים ואפשרות לתרום ממתנותיו. כל קהילה שומרת על ייחודה.</p></div>
+    <div class="pc rv" style="--d:3">
+      <svg viewBox="0 0 84 84"><rect x="14" y="40" width="56" height="26" rx="6" fill="#4f7a3c"/><path d="M42 40V16M42 24c0-8 6-12 14-12 0 8-6 12-14 12zM42 30c0-6-4-10-12-10 0 6 4 10 12 10z" fill="#8fb066" stroke="#2f5226" stroke-width="3" stroke-linecap="round"/></svg>
+      <h3>אחריות</h3><p>הנהגה היא שירות ואחריות. שבט הוא מעגל שייכות שאפשר לבנות בו אמון.</p></div>
+  </div>
+  <p class="quote rv">אחדות שאינה אחידות. <em>אדם אינו מעל אדם.</em><br>הנהגה היא שירות ואחריות.</p>
+</div></section>
+
+<!-- ================= COVENANT ================= -->
+<section class="cov pad" id="covenant"><div class="wrap two">
+  <div class="net rv" id="net"><svg viewBox="0 0 400 400" aria-label="רשת של שבטים מתחברת"></svg></div>
+  <div>
+    <div class="eyebrow rv">מהחיבור בין אנשים — לאמנה ולברית</div>
+    <h2 class="rv" style="--d:1">שפה משותפת והסכמות ברורות</h2>
+    <p class="rv" style="--d:2;margin-top:16px;color:#3a4a2e">המפגש הוא הזמנה להתחיל דרך לגיבוש אמנה משותפת ברוח אמנת בראשית / FAIR, שתהיה בסיס לברית בין השבטים והקהילות המתהווים. אמנה שתעזור לנו לתת תשובות לשאלות של החיים עצמם:</p>
+    <ol class="qs">
+      <li class="rv" style="--d:3"><i>1</i>כיצד מקבלים החלטות ומחלקים אחריות?</li>
+      <li class="rv" style="--d:4"><i>2</i>כיצד מנהלים משאבים וכספים בשקיפות ובהוגנות?</li>
+      <li class="rv" style="--d:5"><i>3</i>כיצד שומרים על חירות האדם ועל עצמאות כל קהילה?</li>
+      <li class="rv" style="--d:6"><i>4</i>כיצד דואגים לילדים, למשפחות ולמי שזקוק לתמיכה?</li>
+      <li class="rv" style="--d:7"><i>5</i>כיצד מיישבים מחלוקות ומטפחים אמון?</li>
+      <li class="rv" style="--d:8"><i>6</i>כיצד מחברים בין קהילות, כך שהידע והמשאבים של כל אחת יועילו גם לאחרות?</li>
+    </ol>
+    <p class="note rv" style="--d:9">הברית מתחילה בהיכרות, נבנית במעשים ומעמיקה דרך הסכמות שאפשר לקיים.</p>
+  </div>
+</div></section>
+
+<!-- ================= ECONOMY ================= -->
+<section class="eco pad" id="economy"><div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow rv" style="color:var(--gold)">כלכלת שפע</div>
+      <h2 class="rv" style="--d:1">נותנים לערבות כלים מעשיים</h2>
+      <p class="rv" style="--d:2">רבים מאיתנו משקיעים את מרבית כוחותיהם במאמץ להחזיק את החיים לבד: מגורים, פרנסה, חינוך ודאגה למחר. אנחנו מבקשות לבחון כיצד התארגנות משותפת יכולה להפחית את העומס הזה ולפנות מקום ליצירה, למשפחה ולשליחות.</p>
+      <p class="rv" style="--d:3">כלכלת שפע מתחילה ביכולת לראות מה כבר נמצא בינינו — ולחבר אותם באופן שיוצר ערך ופרנסה.</p>
+    </div>
+    <div class="orbit rv" style="--d:2" aria-label="אדמה, ידע, זמן, כישרונות, ציוד, קשרים">
+      <div class="ring">
+        <div class="item" style="--i:0"><span><b>🌱</b>אדמה</span></div>
+        <div class="item" style="--i:1"><span><b>💡</b>ידע</span></div>
+        <div class="item" style="--i:2"><span><b>⏳</b>זמן</span></div>
+        <div class="item" style="--i:3"><span><b>🎨</b>כישרונות</span></div>
+        <div class="item" style="--i:4"><span><b>🛠️</b>ציוד</span></div>
+        <div class="item" style="--i:5"><span><b>🤝</b>קשרים</span></div>
+      </div>
+      <div class="core">ערך<br>ופרנסה</div>
+    </div>
+  </div>
+  <div class="opts">
+    <div class="opt rv" style="--d:1"><b>חקלאות</b><p>גידול מזון וטיפוח אדמות.</p></div>
+    <div class="opt rv" style="--d:2"><b>מיזמים משותפים</b><p>מקורות פרנסה מקומיים.</p></div>
+    <div class="opt rv" style="--d:3"><b>שיתוף</b><p>כלים, ציוד, ידע ושירותים.</p></div>
+    <div class="opt rv" style="--d:4"><b>הפחתת הוצאות</b><p>שיתופי פעולה שמקלים על משפחות.</p></div>
+    <div class="opt rv" style="--d:5"><b>תמיכה ומימון</b><p>מנגנונים ליוזמות קהילתיות.</p></div>
+    <div class="opt rv" style="--d:6"><b>בהדרגה</b><p>תקציב ברור, הסכמות הוגנות, אחריות משותפת.</p></div>
+  </div>
+  <p class="closing rv">היציאה מתודעת הישרדות מתחילה כשיש לנו על מי להישען — וכשאנחנו נעשים משענת זה לזה.</p>
+</div></section>
+
+<!-- ================= KIDS ================= -->
+<section class="kids pad"><div class="wrap two">
+  <div class="art rv">
+    <svg viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="80" cy="80" r="34" fill="#ffd36b"/>
+      <path d="M0 300 Q200 250 400 300V400H0Z" fill="#8fb066"/>
+      <g class="sway" style="--i:0"><rect x="186" y="170" width="28" height="150" rx="10" fill="#8a5a36"/>
+        <circle cx="200" cy="140" r="72" fill="#4f7a3c"/><circle cx="150" cy="170" r="46" fill="#6d8f52"/><circle cx="252" cy="165" r="50" fill="#5f8545"/>
+        <circle cx="180" cy="120" r="9" fill="#c4552d"/><circle cx="232" cy="150" r="9" fill="#c4552d"/><circle cx="205" cy="180" r="9" fill="#c4552d"/></g>
+      <path d="M170 190v120M232 190v120" stroke="#6b4a2c" stroke-width="3"/>
+      <g class="sway" style="--i:2"><rect x="165" y="305" width="72" height="9" rx="4" fill="#c4552d"/></g>
+      <g><circle cx="90" cy="290" r="11" fill="#f1c9a3"/><rect x="80" y="302" width="20" height="30" rx="8" fill="#e9a23b"/>
+         <circle cx="320" cy="296" r="11" fill="#f1c9a3"/><rect x="310" y="308" width="20" height="28" rx="8" fill="#6d8f52"/>
+         <circle cx="352" cy="310" r="8" fill="#f1c9a3"/><rect x="345" y="319" width="14" height="22" rx="6" fill="#c4552d"/></g>
+      <g fill="#c4552d"><path d="M300 80l22 12-22 12z"><animateTransform attributeName="transform" type="translate" values="0 0;-12 -14;0 0" dur="5s" repeatCount="indefinite"/></path></g>
+    </svg>
+  </div>
+  <div>
+    <div class="eyebrow rv">הילדים והמשפחות בלב הדרך</div>
+    <h2 class="rv" style="--d:1">מרחבי חיים לשייכות וסקרנות</h2>
+    <p class="rv" style="--d:2;margin-top:18px;color:#3a4a2e">אנחנו מבקשות להצמיח מרחבי חיים שבהם ילדים יוכלו לחוות שייכות, טבע, חברות, למידה וסקרנות. קהילה יכולה לחבר בין משפחות, אנשי חינוך ובעלי מלאכה; לאפשר למידה מתוך חקירה ועשייה; ולתת להורים תמיכה וקשר אנושי לאורך הדרך.</p>
+    <div class="chips"><span class="rv" style="--d:3">שייכות</span><span class="rv" style="--d:4">טבע</span><span class="rv" style="--d:5">חברות</span><span class="rv" style="--d:6">למידה</span><span class="rv" style="--d:7">סקרנות</span></div>
+    <p class="rv" style="--d:8;margin-top:22px;color:#3a4a2e">את המרחבים האלה נרצה לפתח מתוך הקשבה לצורכי הילדים, לרציפות חייהם ולביטחונם.</p>
+  </div>
+</div></section>
+
+<!-- ================= PLAN ================= -->
+<section class="plan pad" id="plan"><div class="wrap">
+  <h2 class="rv">מה מתוכנן למפגש?</h2>
+  <p class="sub rv">יום של היכרות ועשייה, המחבר בין אדמה, אנשים וחזון</p>
+  <div class="tl" id="tl"><div class="fill"></div>
+    <div class="st"><div class="dot">1</div><h3>נפגשים ומכירים</h3><p>מי אנחנו, מה כל אחת ואחד מביאים, ומה אנחנו מבקשים לבנות.</p></div>
+    <div class="st"><div class="dot">2</div><h3>נותנים יד לאדמה</h3><p>עשייה משותפת בהתאם לצורכי המקום — טיפוח, הכנת חלקות, שתילה או עבודות נוספות שייקבעו לקראת המפגש.</p></div>
+    <div class="st"><div class="dot">3</div><h3>פותחים את התמונה הרחבה</h3><p>היכרות עם חזון המאסף, התנועה השבטית החדשה והדרך לברית בין קהילות בארץ ובעולם.</p></div>
+    <div class="st"><div class="dot">4</div><h3>מתחילים ליצור חיבורים מעשיים</h3><p>ממפים צרכים, יכולות ומשאבים, ומזהים מי רוצה לקחת חלק בצוותי ההמשך.</p></div>
+    <div class="st"><div class="dot">5</div><h3>נפגשים סביב המדורה</h3><p>מרחב לשיחה, הקשבה, חלומות והעמקת ההיכרות.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= WHO ================= -->
+<section class="who pad" id="who"><div class="wrap">
+  <h2 class="rv">למי המפגש מתאים?</h2>
+  <div class="cloud-chips" id="chipcloud">
+    <span>משפחות המבקשות חיי קהילה</span><span>יחידים המחפשים חיבור לאדמה</span><span>בעלי אדמות ומרחבים</span><span>אנשי חקלאות</span><span>פרמקלצ׳ר</span><span>בנייה</span><span>אנשי חינוך</span><span>ריפוי</span><span>יצירה</span><span>ארגון</span><span>כלכלה</span><span>משפט</span><span>גיוס משאבים</span><span>פיתוח מיזמים</span><span>מי שעדיין מחפשים את מקומם</span>
+  </div>
+  <p class="welcome rv">אפשר להגיע עם <b>ניסיון</b>, עם <b>רעיון</b>, עם <b>זוג ידיים</b> או עם <b>נכונות להקשיב ולהשתתף</b>.</p>
+</div></section>
+
+<!-- ================= OUTCOMES ================= -->
+<section class="out pad"><div class="wrap">
+  <h2 class="rv">עם מה נרצה לצאת מהמפגש?</h2>
+  <p class="rv" style="--d:1;margin-top:12px;color:#4a5a3c">עם היכרות ראשונית בין שותפים לדרך, תמונה ברורה יותר של הצרכים והמשאבים, וגרעין המשך שיקדם:</p>
+  <div class="grid">
+    <div class="oc rv" style="--d:1"><b>1</b><p>תהליך משותף ללימוד ולגיבוש האמנה</p></div>
+    <div class="oc rv" style="--d:2"><b>2</b><p>צוותי עשייה לפי תחומים</p></div>
+    <div class="oc rv" style="--d:3"><b>3</b><p>פעולה ראשונה מוגדרת, עם אחראים ולוח זמנים</p></div>
+    <div class="oc rv" style="--d:4"><b>4</b><p>מפגש המשך לבחינת ההתקדמות</p></div>
+  </div>
+  <p class="fine rv">המפגש הוא צעד ראשון בתהליך מתהווה. אפשרויות מגורים, פרנסה או השקעה ייבחנו בנפרד, לפי תנאי המקום והסכמות מפורטות.</p>
+</div></section>
+
+<!-- ================= UNITED HEARTS ================= -->
+<section class="uh pad"><div class="wrap">
+  <div class="eyebrow rv" style="justify-content:center">מיבנאל — לרשת של קהילות</div>
+  <h2 class="rv" style="--d:1">קהילות שלומדות זו מזו</h2>
+  <p class="rv" style="--d:2;max-width:680px;margin:14px auto 0;color:#2c3b22">המבט שלנו רחב: קהילות בארץ ובעולם שיוכלו ללמוד זו מזו, לשתף ידע, לפתח יוזמות ולתמוך במשפחות ובילדים. כל קהילה תוכל להצמיח את דרכה מתוך המקום והאנשים שלה, ולהיות חלק מברית רחבה של לבבות.</p>
+  <p class="tag rv" style="--d:3">United Hearts — אנושות אחת. שבטים רבים. לב אחד.</p>
+</div></section>
+
+<!-- ================= JOIN ================= -->
+<section class="join pad" id="join"><div class="wrap grid">
+  <div>
+    <div class="eyebrow rv" style="color:var(--gold)">בואו להיות חלק מההתחלה</div>
+    <h2 class="rv" style="--d:1">נשמח לשמוע מכם</h2>
+    <p class="lead rv" style="--d:2">אם גם אתם מרגישים שהגיע הזמן לחבר בין מה שאתם מאמינים בו לבין הדרך שבה אתם חיים — אנחנו מזמינות אתכם להיפגש. להביא את המתנות שלכם, להכיר את מי שצועדים לצדכם, לתת יד לאדמה ולבנות יחד בסיס של אמון.</p>
+    <svg class="fire rv" viewBox="0 0 300 260" aria-hidden="true" style="--d:3">
+      <ellipse cx="150" cy="238" rx="110" ry="10" fill="#000" opacity=".35"/>
+      <g id="sparks"></g>
+      <path class="flame" style="--i:0" d="M150 220C95 215 80 160 118 120c6 22 18 26 22 14-12-40 20-70 34-110 20 40 62 70 42 130-4 14-22 30-66 66z" fill="#c4552d"/>
+      <path class="flame" style="--i:1" d="M150 222c-42-4-52-48-26-80 4 16 14 18 16 8-8-30 14-52 26-82 16 30 44 54 30 96-4 12-20 40-46 58z" fill="#e9772f"/>
+      <path class="flame" style="--i:2" d="M150 224c-26-2-34-30-16-52 4 10 10 10 12 4-4-18 6-32 14-46 10 20 28 36 20 62-4 12-14 28-30 32z" fill="#ffc94d"/>
+      <rect x="62" y="218" width="176" height="20" rx="10" fill="#6b4a2c" transform="rotate(-8 150 228)"/>
+      <rect x="62" y="218" width="176" height="20" rx="10" fill="#8a5a36" transform="rotate(8 150 228)"/>
+    </svg>
+    <div class="details" id="details">
+      <div class="rv" style="--d:1"><b>מיקום</b><span data-key="location">יבנאל — [פרטי המקום וההגעה]</span></div>
+      <div class="rv" style="--d:2"><b>תאריך</b><span data-key="date">[תאריך מלא ושנה — לאישור]</span></div>
+      <div class="rv" style="--d:3"><b>שעות</b><span data-key="hours">[להשלמה]</span></div>
+      <div class="rv" style="--d:4"><b>עלות והסדרי השתתפות</b><span data-key="cost">[להשלמה]</span></div>
+      <div class="rv" style="--d:5"><b>מה להביא</b><span data-key="bring">[להשלמה בהתאם לפעילות]</span></div>
+      <div class="rv" style="--d:6"><b>הגעה עם ילדים, נגישות ולינה</b><span data-key="access">[פרטים להשלמה]</span></div>
+      <div class="rv" style="--d:7"><b>ליצירת קשר</b><span data-key="contact">[שם וטלפון]</span></div>
+    </div>
+  </div>
+
+  <div class="card rv" style="--d:2">
+    <form id="f" novalidate>
+      <div class="prog" id="prog"><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="stepno" id="stepno">שלב 1 מתוך 4</div>
+
+      <div class="step show" data-s="1">
+        <div class="q">נעים להכיר</div>
+        <div class="hint">רק מה שצריך כדי שנוכל לחזור אליך.</div>
+        <div class="fld"><label for="name">שם מלא</label><input id="name" name="name" autocomplete="name" required><div class="em">איך לקרוא לך?</div></div>
+        <div class="row2">
+          <div class="fld"><label for="phone">טלפון</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" style="text-align:right" required><div class="em">מספר טלפון תקין, בבקשה</div></div>
+          <div class="fld"><label for="email">אימייל (לא חובה)</label><input id="email" name="email" type="email" autocomplete="email" dir="ltr" style="text-align:right"><div class="em">נראה שהכתובת לא שלמה</div></div>
+        </div>
+        <div class="row2">
+          <div class="fld"><label for="adults">כמה מבוגרים מגיעים?</label><input id="adults" name="adults" type="number" min="1" max="20" value="1" inputmode="numeric"></div>
+          <div class="fld"><label for="kids">כמה ילדים?</label><input id="kids" name="kids" type="number" min="0" max="20" value="0" inputmode="numeric"></div>
+        </div>
+      </div>
+
+      <div class="step" data-s="2">
+        <div class="q">מה מושך אותך למפגש?</div>
+        <div class="hint">אפשר לבחור כמה.</div>
+        <div class="opts2" data-g="draws">
+          <input type="checkbox" id="d1" name="draws" value="חיבור לאדמה"><label for="d1">חיבור לאדמה</label>
+          <input type="checkbox" id="d2" name="draws" value="קהילה וערבות"><label for="d2">קהילה וערבות</label>
+          <input type="checkbox" id="d3" name="draws" value="חינוך ילדים"><label for="d3">חינוך וגידול ילדים</label>
+          <input type="checkbox" id="d4" name="draws" value="אמנה משותפת"><label for="d4">גיבוש אמנה</label>
+          <input type="checkbox" id="d5" name="draws" value="פרנסה משמעותית"><label for="d5">פרנסה משמעותית</label>
+          <input type="checkbox" id="d6" name="draws" value="הכרות עם השבטים"><label for="d6">להכיר את התנועה השבטית</label>
+        </div>
+        <div class="fld" style="margin-top:16px"><label for="draws_txt">עוד משהו שמושך אותך?</label><input id="draws_txt" name="draws_txt"></div>
+      </div>
+
+      <div class="step" data-s="3">
+        <div class="q">אילו יכולות או משאבים תרצה/י להביא?</div>
+        <div class="hint">אדמה, ידע, זמן, כישרונות, ציוד, קשרים — הכול נחשב.</div>
+        <div class="opts2" data-g="bring">
+          <input type="checkbox" id="b1" name="bring" value="זוג ידיים"><label for="b1">זוג ידיים</label>
+          <input type="checkbox" id="b2" name="bring" value="אדמה או מרחב"><label for="b2">אדמה / מרחב</label>
+          <input type="checkbox" id="b3" name="bring" value="חקלאות / פרמקלצ׳ר"><label for="b3">חקלאות / פרמקלצ׳ר</label>
+          <input type="checkbox" id="b4" name="bring" value="בנייה"><label for="b4">בנייה</label>
+          <input type="checkbox" id="b5" name="bring" value="חינוך"><label for="b5">חינוך</label>
+          <input type="checkbox" id="b6" name="bring" value="ריפוי ויצירה"><label for="b6">ריפוי ויצירה</label>
+          <input type="checkbox" id="b7" name="bring" value="ארגון / כלכלה / משפט"><label for="b7">ארגון, כלכלה, משפט</label>
+          <input type="checkbox" id="b8" name="bring" value="גיוס משאבים ויזמות"><label for="b8">גיוס משאבים ויזמות</label>
+          <input type="checkbox" id="b9" name="bring" value="ציוד"><label for="b9">ציוד</label>
+          <input type="checkbox" id="b10" name="bring" value="נכונות להקשיב"><label for="b10">נכונות להקשיב</label>
+        </div>
+        <div class="fld" style="margin-top:16px"><label for="bring_txt">ספרו לנו קצת</label><textarea id="bring_txt" name="bring_txt" rows="2"></textarea></div>
+      </div>
+
+      <div class="step" data-s="4">
+        <div class="q">מה נחוץ לך כדי לקחת חלק?</div>
+        <div class="hint">כדי שנוכל להיערך. אפשר לדלג.</div>
+        <div class="opts2" data-g="need">
+          <input type="checkbox" id="n1" name="need" value="הסעה"><label for="n1">הסעה</label>
+          <input type="checkbox" id="n2" name="need" value="לינה"><label for="n2">לינה</label>
+          <input type="checkbox" id="n3" name="need" value="מקום לילדים"><label for="n3">מקום לילדים</label>
+          <input type="checkbox" id="n4" name="need" value="נגישות"><label for="n4">נגישות</label>
+          <input type="checkbox" id="n5" name="need" value="התאמה תזונתית"><label for="n5">התאמה תזונתית</label>
+        </div>
+        <div class="fld" style="margin-top:16px"><label for="need_txt">משהו נוסף?</label><textarea id="need_txt" name="need_txt" rows="2"></textarea></div>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </div>
+
+      <div class="nav2" id="nav2">
+        <button type="button" class="btn" id="next">המשך <span class="arr">←</span></button>
+        <button type="button" class="bk" id="back" hidden>→ חזרה</button>
+      </div>
+      <div class="skip" id="skip" hidden>אפשר לדלג על כל שאלה שאינה חובה.</div>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <svg viewBox="0 0 170 170" aria-hidden="true">
+        <circle cx="85" cy="85" r="80" fill="#dbe6c8"/>
+        <path d="M30 128h110" stroke="#8a5a36" stroke-width="8" stroke-linecap="round"/>
+        <path class="stem" d="M85 128V70" stroke="#2f5226" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path class="lf" style="--i:0" d="M85 90C85 62 108 50 134 54 134 80 112 94 85 90z" fill="#6d8f52"/>
+        <path class="lf lfr" style="--i:1" d="M85 104C85 80 64 70 40 74 40 98 60 108 85 104z" fill="#4f7a3c"/>
+        <path class="lf" style="--i:2" d="M85 72c-8-14-2-26 6-32 8 8 8 22 0 32z" fill="#e9a23b"/>
+      </svg>
+      <h3>תודה, <span id="dn"></span>!</h3>
+      <p>קיבלנו את ההרשמה. נחזור אליך בטלפון עם כל הפרטים. נתראה ביבנאל.</p>
+    </div>
+  </div>
+</div></section>
+
+<footer><b>החלוציות החדשה</b>בהזמנת זרינה ואפרת יוסף, לחיבור החלוצים ולהצמחת ברית בין שבטי האחדות.<br>United Hearts — אנושות אחת. שבטים רבים. לב אחד.</footer>
+
+<div class="admbar" id="admbar"><span>מצב מנהל: אפשר לערוך את פרטי המפגש בלבד</span><button id="admSave" type="button">שמירה</button><button class="o" id="admOut" type="button">התנתקות</button></div>
+<div class="modal" id="admModal" role="dialog" aria-modal="true" aria-labelledby="admT"><form class="box" id="admForm">
+  <h3 id="admT">כניסת מנהל</h3>
+  <div class="fld"><label for="admEmail">אימייל</label><input id="admEmail" type="email" dir="ltr" style="text-align:right" autocomplete="username" required></div>
+  <div class="fld"><label for="admPass">סיסמה</label><input id="admPass" type="password" dir="ltr" style="text-align:right" autocomplete="current-password" required></div>
+  <div class="msg" id="admMsg" role="alert"></div>
+  <div class="row"><button class="btn" type="submit">כניסה</button><button class="bk" type="button" id="admCancel">ביטול</button></div>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<div class="mcta" id="mcta"><a class="btn" href="#join">רוצה להשתתף ולהכיר את הדרך</a></div>
+
+<script>
+(()=>{
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+
+/* hero: stagger words, rays */
+$$('#h1 .w').forEach((w,i)=>w.style.animationDelay=(.15+i*.09)+'s');
+const rays=$('#rays');for(let i=0;i<16;i++){const a=i*22.5*Math.PI/180;el('line',{x1:300+Math.cos(a)*120,y1:420+Math.sin(a)*120,x2:300+Math.cos(a)*(i%2?170:200),y2:420+Math.sin(a)*(i%2?170:200)},rays)}
+/* crops */
+const crops=$('#crops');let idx=0;
+for(let r=0;r<4;r++){const y=815+r*20,n=22+r*3,sc=.55+r*.22;
+  for(let c=0;c<n;c++){const x=(c+.5)*(1440/n)+(r%2?18:0);const g=el('g',{transform:`translate(${x} ${y}) scale(${sc})`},crops);
+    const s=el('g',{class:'sprout'},g);s.style.setProperty('--i',idx++%40+r*3);
+    const sw=el('g',{class:'sway'},s);sw.style.setProperty('--i',c%7);
+    el('path',{d:'M0 0V-26',stroke:'#2f5226','stroke-width':4,'stroke-linecap':'round'},sw);
+    el('path',{d:'M0-14C0-30 14-36 26-32 26-18 14-12 0-14z',fill:r%2?'#9cc46c':'#7fae52'},sw);
+    el('path',{d:'M0-22C0-36-14-40-24-36-24-24-12-20 0-22z',fill:r%2?'#7fae52':'#b6d681'},sw)}}
+const far=$('#farRows');for(let r=0;r<5;r++){el('path',{d:`M0 ${735+r*10} Q360 ${715+r*10} 720 ${735+r*10} T1440 ${730+r*10}`,fill:'none'},far)}
+
+/* nav + mobile cta */
+const nav=$('#nav'),mcta=$('#mcta'),join=$('#join');
+/* parallax + timeline progress, one rAF-throttled scroll handler */
+const par=$$('[data-par]'),tl=$('#tl'),steps=$$('.st'),fill=$('.fill',tl);
+let tick=false;
+function onScroll(){
+  const y=scrollY;
+  nav.classList.toggle('solid',y>40);
+  if(!reduce&&y<1100)par.forEach(g=>g.style.transform=`translateY(${y*+g.dataset.par*.5}px)`);
+  const jr=join.getBoundingClientRect();
+  mcta.classList.toggle('show',y>500&&!(jr.top<innerHeight&&jr.bottom>0));
+  const r=tl.getBoundingClientRect(),vh=innerHeight;
+  const p=Math.min(1,Math.max(0,(vh*.6-r.top)/r.height));
+  fill.style.setProperty('--p',(p*100)+'%');
+  steps.forEach(s=>{const b=s.getBoundingClientRect();s.classList.toggle('on',b.top<vh*.62)});
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+  $$('[data-to]',e.target).forEach(countUp)}}),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+$$('.rv,.net').forEach(n=>io.observe(n));
+function countUp(n){const to=+n.dataset.to;if(reduce){n.textContent=to;return}let t0;const f=t=>{t0??=t;const p=Math.min(1,(t-t0)/1200);n.textContent=Math.round(to*(1-Math.pow(1-p,3)));p<1&&requestAnimationFrame(f)};requestAnimationFrame(f)}
+$$('.stat').forEach(s=>io.observe(s));
+
+/* floating chips offsets */
+$$('#chipcloud span').forEach((s,i)=>s.style.setProperty('--i',i));
+
+/* tribes network */
+const net=$('#net svg');const P=[[200,200],[200,70],[320,130],[330,260],[210,340],[80,280],[70,140],[140,200]];
+const E=[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1],[7,0],[7,6],[7,5]];
+E.forEach(([a,b],i)=>{const [x1,y1]=P[a],[x2,y2]=P[b];const l=el('line',{x1,y1,x2,y2},net);l.style.setProperty('--l',Math.hypot(x2-x1,y2-y1));l.style.setProperty('--i',i)});
+P.forEach(([x,y],i)=>{const h=el('circle',{class:'halo',cx:x,cy:y,r:10,'stroke-width':2},net);h.style.setProperty('--i',i);
+  const c=el('circle',{class:'n'+(i===0?' center':''),cx:x,cy:y,r:i===0?18:11},net);c.style.setProperty('--i',i)});
+
+/* fire sparks */
+const sp=$('#sparks');for(let i=0;i<14;i++){const c=el('circle',{cx:120+Math.random()*60,cy:150,r:1.5+Math.random()*2.2,fill:i%3?'#ffc94d':'#e9772f',class:'spark'},sp);c.style.setProperty('--dl',(Math.random()*2.6).toFixed(2)+'s');c.style.setProperty('--dx',(Math.random()*70-35)+'px')}
+
+/* ---------------- form ---------------- */
+const f=$('#f'),steps2=$$('.step'),prog=$$('#prog i'),stepno=$('#stepno'),nextB=$('#next'),backB=$('#back'),skip=$('#skip');
+let cur=1,N=steps2.length;
+function show(n,dir){
+  const old=steps2[cur-1];old.classList.remove('show');cur=n;const s=steps2[n-1];
+  s.classList.toggle('back',dir==='b');s.classList.add('show');
+  prog.forEach((p,i)=>p.classList.toggle('on',i<n));stepno.textContent=`שלב ${n} מתוך ${N}`;
+  backB.hidden=n===1;skip.hidden=n===1;nextB.firstChild.textContent=n===N?'שלחו אותי ':'המשך ';
+  if(n>1)s.scrollIntoView({block:'nearest'});
+}
+function bad(inp,msg){const w=inp.closest('.fld');w.classList.remove('err');void w.offsetWidth;w.classList.add('err');if(msg)$('.em',w).textContent=msg}
+function ok(inp){inp.closest('.fld')?.classList.remove('err')}
+function validate(){
+  if(cur!==1)return true;let good=true;
+  const n=$('#name'),p=$('#phone'),e=$('#email');
+  if(n.value.trim().length<2){bad(n);good=false}else ok(n);
+  if(!/^[0-9+\-\s()]{9,16}$/.test(p.value.trim())){bad(p);good=false}else ok(p);
+  if(e.value&&!/^\S+@\S+\.\S+$/.test(e.value)){bad(e);good=false}else ok(e);
+  if(!good)$('.err input',f).focus();return good}
+$$('input',f).forEach(i=>i.addEventListener('input',()=>ok(i)));
+nextB.addEventListener('click',async()=>{
+  if(!validate())return;
+  if(cur<N){show(cur+1,'f');return}
+  await submit()});
+backB.addEventListener('click',()=>cur>1&&show(cur-1,'b'));
+f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();nextB.click()}});
+async function submit(){
+  const fd=new FormData(f);if(fd.get('website'))return;        // honeypot
+  const data={};
+  for(const k of new Set(fd.keys())){if(k==='website')continue;const v=fd.getAll(k);data[k]=v.length>1?v:v[0]}
+  nextB.disabled=true;nextB.style.opacity=.6;
+  try{
+    await window.REG.send(data);
+    f.hidden=true;$('#dn').textContent=(data.name||'').split(' ')[0];$('#done').hidden=false;
+  }catch(err){console.error(err);nextB.disabled=false;nextB.style.opacity=1;alert('משהו השתבש בשליחה. נסו שוב בעוד רגע או צרו קשר בטלפון.')}
+}
+})();
+</script>
+<script type="module">
+/* ========== CONFIG ==========
+   The Supabase anon key is PUBLIC by design. Security comes from the RLS policies in supabase.sql. */
+const SUPABASE_URL='';        // e.g. https://abcd1234.supabase.co
+const SUPABASE_ANON_KEY='';   // Supabase -> Project Settings -> API -> anon public key
+const ADMIN_EMAIL='zarina1990@gmail.com';
+const NOTIFY_TO='zarina1990@gmail.com', NOTIFY_CC='345287@gmail.com';
+
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const KEYS=['location','date','hours','cost','bring','access','contact'];       // the ONLY editable fields
+const LABEL={location:'מיקום',date:'תאריך',hours:'שעות',cost:'עלות והסדרי השתתפות',bring:'מה להביא',access:'הגעה עם ילדים, נגישות ולינה',contact:'ליצירת קשר'};
+const defaults={};$$('[data-key]').forEach(n=>{if(!(n.dataset.key in defaults))defaults[n.dataset.key]=n.textContent});
+let vals={...defaults};
+const paint=()=>$$('[data-key]').forEach(n=>{if(n.tagName!=='TEXTAREA')n.textContent=vals[n.dataset.key]??''});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)};
+
+/* ---------- Supabase (optional until configured) ---------- */
+let sb=null;
+if(SUPABASE_URL&&SUPABASE_ANON_KEY){
+  try{
+    const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2');
+    sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    const {data,error}=await sb.from('site_details').select('key,value');
+    if(!error&&data){data.forEach(r=>{if(KEYS.includes(r.key))vals[r.key]=r.value});paint()}
+  }catch(e){console.warn('Supabase unavailable, showing default details',e);sb=null}
+}
+
+/* ---------- registration: email to both addresses (+ DB backup when Supabase is set) ---------- */
+const HE={name:'שם',phone:'טלפון',email:'אימייל',adults:'מבוגרים',kids:'ילדים',draws:'מה מושך',draws_txt:'מה מושך (חופשי)',bring:'מה מביא/ה',bring_txt:'מה מביא/ה (חופשי)',need:'מה נחוץ',need_txt:'מה נחוץ (חופשי)'};
+window.REG={async send(data){
+  const readable={};
+  for(const k in data){const v=Array.isArray(data[k])?data[k].join(', '):data[k];if(v!=='')readable[HE[k]||k]=v}
+  let emailOk=false,dbOk=false;
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/'+NOTIFY_TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:'הרשמה חדשה למפגש יבנאל: '+(data.name||''),_cc:NOTIFY_CC,_template:'table',_captcha:'false',...readable})});
+    const j=await r.json().catch(()=>({}));
+    emailOk=r.ok&&String(j.success)!=='false';
+    if(!emailOk)console.warn('FormSubmit replied:',j);
+  }catch(e){console.warn('email failed',e)}
+  if(sb){const {error}=await sb.from('registrations').insert({data});dbOk=!error;if(error)console.warn('db failed',error)}
+  if(!emailOk&&!dbOk)throw new Error('registration not delivered');
+  if(!emailOk)console.warn('Saved to the database, but the email notification failed.');
+}};
+
+/* ---------- admin ---------- */
+const modal=$('#admModal'),msg=$('#admMsg'),bar=$('#admbar');
+const openM=()=>{modal.classList.add('show');msg.textContent='';$('#admEmail').focus()};
+const closeM=()=>modal.classList.remove('show');
+$('#admOpen').onclick=()=>{
+  if(!sb){toast('מצב מנהל עדיין לא חובר לשרת (ראו README)');return}
+  openM()};
+$('#admCancel').onclick=closeM;
+modal.addEventListener('click',e=>{if(e.target===modal)closeM()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+$('#admForm').addEventListener('submit',async e=>{
+  e.preventDefault();msg.textContent='נכנסים…';
+  const {data,error}=await sb.auth.signInWithPassword({email:$('#admEmail').value.trim(),password:$('#admPass').value});
+  $('#admPass').value='';
+  if(error){msg.textContent='האימייל או הסיסמה שגויים';return}
+  if((data.user.email||'').toLowerCase()!==ADMIN_EMAIL){await sb.auth.signOut();msg.textContent='אין הרשאת מנהל';return}
+  closeM();enterAdmin()});
+function enterAdmin(){
+  document.body.classList.add('admin');bar.classList.add('show');
+  $$('#details [data-key]').forEach(n=>{const t=document.createElement('textarea');t.className='ed';t.dataset.key=n.dataset.key;t.value=vals[n.dataset.key]??'';t.rows=1;t.setAttribute('aria-label',LABEL[n.dataset.key]);n.replaceWith(t)});
+  $('#details').scrollIntoView({block:'center'})}
+function leaveAdmin(){
+  document.body.classList.remove('admin');bar.classList.remove('show');
+  $$('#details textarea.ed').forEach(t=>{const n=document.createElement('span');n.dataset.key=t.dataset.key;n.textContent=vals[t.dataset.key]??'';t.replaceWith(n)});paint()}
+$('#admOut').onclick=async()=>{await sb.auth.signOut();leaveAdmin();toast('התנתקת')};
+$('#admSave').onclick=async()=>{
+  const rows=$$('#details textarea.ed').filter(t=>KEYS.includes(t.dataset.key)).map(t=>({key:t.dataset.key,value:t.value.trim().slice(0,400)}));
+  const {error}=await sb.from('site_details').upsert(rows,{onConflict:'key'});
+  if(error){toast('השמירה נכשלה: '+error.message);return}
+  rows.forEach(r=>vals[r.key]=r.value);paint();toast('נשמר ✓')};
+if(sb){const {data}=await sb.auth.getSession();if((data.session?.user.email||'').toLowerCase()===ADMIN_EMAIL)enterAdmin()}
+</script>
+</body>
+</html>
