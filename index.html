@@ -73,6 +73,18 @@ nav .btn{padding:10px 20px;font-size:15px}
 .sway{animation:sway 4s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-300ms);transform-box:fill-box;transform-origin:50% 100%}
 @keyframes sway{from{rotate:-4deg}to{rotate:4deg}}
 
+
+/* mobile-first hero: text on top, then a scene strip with the sun centered above the hills */
+@media(max-width:860px){
+  .hero{height:auto;min-height:100svh;max-height:none}
+  .hero svg.scene{inset:auto 0 0 0;height:max(340px,52vw)}
+  .hero .copy{position:relative;inset:auto;justify-content:flex-start;padding:92px 22px calc(max(340px,52vw) - 10px);min-height:100svh}
+  .hero h1{font-size:clamp(42px,12.5vw,64px)}
+  .hero .acts{flex-direction:column;align-items:stretch}
+  .hero .acts .btn{justify-content:center;width:100%}
+  .hero .lead{margin:16px 0 24px}
+  .facts{margin-top:18px}
+}
 /* ---------- marquee ---------- */
 .marquee{background:var(--green);color:var(--sand);overflow:hidden;padding:18px 0;white-space:nowrap}
 .marquee div{display:inline-flex;gap:50px;animation:mq 30s linear infinite;font:500 26px 'Frank Ruhl Libre',serif}
@@ -323,11 +335,11 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
     <linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db878"/><stop offset="1" stop-color="#7f9d5c"/></linearGradient>
     <linearGradient id="h3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f8545"/><stop offset="1" stop-color="#3d6230"/></linearGradient>
   </defs>
-  <g data-par="0.05"><g class="sun" style="transform-origin:300px 420px">
+  <g data-par="0.05"><g id="sunPos"><g class="sun" style="transform-origin:300px 420px">
     <circle cx="300" cy="420" r="230" fill="url(#sg)"/>
     <g class="rays" stroke="#ffd98a" stroke-width="5" stroke-linecap="round" opacity=".8" id="rays"></g>
     <circle cx="300" cy="420" r="82" fill="#ffd36b"/>
-  </g></g>
+  </g></g></g>
   <g data-par="0.12" fill="#fff" opacity=".9">
     <g class="cloud" style="animation-duration:90s;animation-delay:-30s"><ellipse cx="200" cy="210" rx="90" ry="22"/><ellipse cx="260" cy="196" rx="52" ry="26"/></g>
     <g class="cloud" style="animation-duration:120s;animation-delay:-80s"><ellipse cx="760" cy="150" rx="110" ry="24"/><ellipse cx="830" cy="134" rx="56" ry="28"/></g>
@@ -671,6 +683,10 @@ for(let r=0;r<4;r++){const y=815+r*20,n=22+r*3,sc=.55+r*.22;
     el('path',{d:'M0-22C0-36-14-40-24-36-24-24-12-20 0-22z',fill:r%2?'#7fae52':'#b6d681'},sw)}}
 const far=$('#farRows');for(let r=0;r<5;r++){el('path',{d:`M0 ${735+r*10} Q360 ${715+r*10} 720 ${735+r*10} T1440 ${730+r*10}`,fill:'none'},far)}
 
+/* sun to the middle of the strip on phones (visible x-range there is about 210..1230) */
+const mq=matchMedia('(max-width:860px)'),sunPos=$('#sunPos');
+const placeSun=()=>sunPos.setAttribute('transform',mq.matches?'translate(430 -10)':'translate(0 0)');
+placeSun();mq.addEventListener('change',placeSun);
 /* nav + mobile cta */
 const nav=$('#nav'),mcta=$('#mcta'),join=$('#join');
 /* parallax + timeline progress, one rAF-throttled scroll handler */
