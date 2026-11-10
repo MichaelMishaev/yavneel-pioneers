@@ -660,8 +660,8 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
         <path class="lf lfr" style="--i:1" d="M85 104C85 80 64 70 40 74 40 98 60 108 85 104z" fill="#4f7a3c"/>
         <path class="lf" style="--i:2" d="M85 72c-8-14-2-26 6-32 8 8 8 22 0 32z" fill="#e9a23b"/>
       </svg>
-      <h3>כמעט סיימנו, <span id="dn"></span>!</h3>
-      <p>כמעט סיימנו! כדי שההרשמה תגיע אלינו, שלחו את המייל שנפתח.<br>לא נפתח? לחצו על הכפתור.</p><a class="btn" id="mailBtn" href="#" style="margin-top:14px">שליחת ההרשמה במייל</a>
+      <h3>תודה, <span id="dn"></span>!</h3>
+      <p id="doneMsg"></p><a class="btn" id="mailBtn" href="#" hidden style="margin-top:14px">שליחת ההרשמה במייל</a>
     </div>
   </div>
 </div></section>
@@ -783,7 +783,7 @@ async function submit(){
 })();
 </script>
 <script type="module">
-/* ========== CONFIG: GitHub Pages only, no external services ========== */
+/* ========== CONFIG: GitHub Pages, plus FormSubmit for registration email only ========== */
 const ADMIN_EMAIL='zarina1990@gmail.com';
 const ADMIN_PASSWORD='admin1';
 const REPO='MichaelMishaev/yavneel-pioneers';           // where details.json lives (used only when the admin saves)
@@ -805,14 +805,24 @@ try{
   if(r.ok){const d=await r.json();KEYS.forEach(k=>{if(typeof d[k]==='string')vals[k]=d[k]});paint()}
 }catch(e){console.warn('details.json not loaded, showing defaults',e)}
 
-/* ---------- registration: a prefilled email to both addresses, sent from the visitor's own mail app ---------- */
+/* ---------- registration: sent in the background by FormSubmit (the ONLY outside service); mail-app button is the fallback ---------- */
 const HE={name:'שם',phone:'טלפון',email:'אימייל',adults:'מבוגרים',kids:'ילדים',draws:'מה מושך',draws_txt:'מה מושך (חופשי)',bring:'מה מביא/ה',bring_txt:'מה מביא/ה (חופשי)',need:'מה נחוץ',need_txt:'מה נחוץ (חופשי)'};
 window.REG={async send(data){
-  const lines=[];
-  for(const k in data){const v=Array.isArray(data[k])?data[k].join(', '):data[k];if(v!=='')lines.push(`${HE[k]||k}: ${v}`)}
-  const url=`mailto:${MAIL_TO}?cc=${MAIL_CC}&subject=${encodeURIComponent('הרשמה למפגש יבנאל: '+(data.name||''))}&body=${encodeURIComponent('הרשמה למפגש חלוצים ביבנאל\n\n'+lines.join('\n'))}`;
-  $('#mailBtn').href=url;
-  location.href=url;                  // opens the visitor's mail app; the button on the thank-you screen does the same
+  const readable={},lines=[];
+  for(const k in data){const v=Array.isArray(data[k])?data[k].join(', '):data[k];if(v!==''){readable[HE[k]||k]=v;lines.push(`${HE[k]||k}: ${v}`)}}
+  let sent=false;
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/'+MAIL_TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:'הרשמה חדשה למפגש יבנאל: '+(data.name||''),_cc:MAIL_CC,_template:'table',_captcha:'false',...readable})});
+    const j=await r.json().catch(()=>({}));
+    sent=r.ok&&String(j.success)!=='false';
+    if(!sent)console.warn('FormSubmit replied:',j);
+  }catch(e){console.warn('send failed',e)}
+  const msgEl=$('#doneMsg'),btn=$('#mailBtn');
+  if(sent){msgEl.innerHTML='קיבלנו את ההרשמה. נחזור אליך עם כל הפרטים.<br>נתראה ביבנאל.';btn.hidden=true}
+  else{
+    btn.href=`mailto:${MAIL_TO}?cc=${MAIL_CC}&subject=${encodeURIComponent('הרשמה למפגש יבנאל: '+(data.name||''))}&body=${encodeURIComponent('הרשמה למפגש חלוצים ביבנאל\n\n'+lines.join('\n'))}`;
+    msgEl.innerHTML='לא הצלחנו לשלוח אוטומטית.<br>לחצו על הכפתור ושלחו את ההרשמה במייל.';btn.hidden=false}
 }};
 
 /* ---------- admin (email + password are checked in this page, by the owner's choice) ---------- */

@@ -1,6 +1,6 @@
 # Yavne'el pioneers landing page: GitHub Pages only
 
-No external services. Files: `index.html` (the page), `details.json` (the 7 editable details), `CNAME`.
+GitHub Pages, plus FormSubmit for registration email only. Files: `index.html` (the page), `details.json` (the 7 editable details), `CNAME`.
 
 ## Admin
 - Open `/#admin` (there is no visible button). A login box appears. The admin email and password are hardcoded at the top of the script in `index.html`
@@ -13,8 +13,10 @@ No external services. Files: `index.html` (the page), `details.json` (the 7 edit
 - Only the 7 fields in `details.json` can be edited from the page.
 
 ## Registration
-There is no server, so the form opens a prefilled email (to both addresses) in the visitor's own mail app, and the
-visitor has to press send. If they close it without sending, nothing reaches you.
+The form sends each registration in the background through FormSubmit (formsubmit.co), the only outside service,
+to both addresses. The first registration after publishing triggers a one-time activation email to the primary
+address: click its link, otherwise no registration emails arrive. If sending fails, the thank-you screen shows
+a button that opens a prefilled email in the visitor's own mail app.
 
 ## Empty details are hidden
 Any of the 7 details with no value is not shown on the public page. Fill one in (admin mode shows all 7) and it appears automatically.
