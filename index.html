@@ -314,6 +314,15 @@ body.admin nav{top:46px}
 .modal .msg{color:var(--clay);font-size:14px;margin-top:10px;min-height:20px}
 .toast{position:fixed;bottom:24px;left:50%;translate:-50% 0;background:#1f2a18;color:#fff;padding:12px 22px;border-radius:99px;z-index:100;font-size:15px;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s var(--out);pointer-events:none}
 .toast.show{opacity:1;transform:none}
+
+.wa{position:fixed;left:18px;bottom:18px;z-index:55;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 26px -8px #128c4baa;text-decoration:none;transition:transform .2s var(--out),box-shadow .2s var(--out)}
+.wa::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:waPing 2.6s ease-out infinite;pointer-events:none}
+@keyframes waPing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+.wa:active{transform:scale(.93)}
+@media(hover:hover) and (pointer:fine){.wa:hover{transform:scale(1.08)}}
+.wa-btn{background:#25d366;color:#0b3d1f;box-shadow:0 10px 26px -10px #25d366aa;margin:0 0 6px}
+@media(hover:hover) and (pointer:fine){.wa-btn:hover{box-shadow:0 16px 30px -10px #25d366cc}}
+@media(max-width:860px){.wa{bottom:84px;left:14px;width:54px;height:54px}}
 footer{background:#0f140d;color:#9aa58b;text-align:center;padding:40px 20px;font-size:14px}
 footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;margin-bottom:6px}
 
@@ -559,6 +568,7 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
     <div class="eyebrow rv" style="color:var(--gold)">בואו להיות חלק מההתחלה</div>
     <h2 class="rv" style="--d:1">נשמח לשמוע מכם</h2>
     <p class="lead rv" style="--d:2">אם גם אתם מרגישים שהגיע הזמן לחבר בין מה שאתם מאמינים בו לבין הדרך שבה אתם חיים — אנחנו מזמינות אתכם להיפגש. להביא את המתנות שלכם, להכיר את מי שצועדים לצדכם, לתת יד לאדמה ולבנות יחד בסיס של אמון.</p>
+    <a class="btn wa-btn rv" style="--d:3" href="https://wa.me/972509066422?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%9E%D7%A4%D7%92%D7%A9%20%D7%94%D7%97%D7%9C%D7%95%D7%A6%D7%99%D7%9D%20%D7%91%D7%99%D7%91%D7%A0%D7%90%D7%9C" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.38 4 15.02c0 2.12.55 4.18 1.6 6L4 29l8.17-1.57a12.02 12.02 0 0 0 5.87 1.5h.01C24.7 28.93 30 23.65 30 17c0-3.2-1.25-6.2-3.5-8.46A11.9 11.9 0 0 0 16.04 3zm0 21.9h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-4.85.93.98-4.72-.24-.37a9.84 9.84 0 0 1-1.5-5.2c0-5.45 4.46-9.9 9.95-9.9 2.65 0 5.14 1.03 7.02 2.9a9.8 9.8 0 0 1 2.9 7c0 5.45-4.46 9.95-9.85 9.95zm5.45-7.43c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.5.7.3 1.26.48 1.7.62.72.23 1.37.2 1.88.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>שאלות? דברו איתנו בוואטסאפ</a>
     <svg class="fire rv" viewBox="0 0 300 260" aria-hidden="true" style="--d:3">
       <ellipse cx="150" cy="238" rx="110" ry="10" fill="#000" opacity=".35"/>
       <g id="sparks"></g>
@@ -678,6 +688,7 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
 </form></div>
 <div class="toast" id="toast"></div>
 
+<a class="wa" href="https://wa.me/972509066422?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%9E%D7%A4%D7%92%D7%A9%20%D7%94%D7%97%D7%9C%D7%95%D7%A6%D7%99%D7%9D%20%D7%91%D7%99%D7%91%D7%A0%D7%90%D7%9C" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.38 4 15.02c0 2.12.55 4.18 1.6 6L4 29l8.17-1.57a12.02 12.02 0 0 0 5.87 1.5h.01C24.7 28.93 30 23.65 30 17c0-3.2-1.25-6.2-3.5-8.46A11.9 11.9 0 0 0 16.04 3zm0 21.9h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-4.85.93.98-4.72-.24-.37a9.84 9.84 0 0 1-1.5-5.2c0-5.45 4.46-9.9 9.95-9.9 2.65 0 5.14 1.03 7.02 2.9a9.8 9.8 0 0 1 2.9 7c0 5.45-4.46 9.95-9.85 9.95zm5.45-7.43c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.5.7.3 1.26.48 1.7.62.72.23 1.37.2 1.88.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg></a>
 <div class="mcta" id="mcta"><a class="btn" href="#join">רוצה להשתתף ולהכיר את הדרך</a></div>
 
 <script>
