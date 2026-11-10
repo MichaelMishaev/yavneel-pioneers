@@ -323,6 +323,48 @@ body.admin nav{top:46px}
 .wa-btn{background:#25d366;color:#0b3d1f;box-shadow:0 10px 26px -10px #25d366aa;margin:0 0 6px}
 @media(hover:hover) and (pointer:fine){.wa-btn:hover{box-shadow:0 16px 30px -10px #25d366cc}}
 @media(max-width:860px){.wa{bottom:84px;left:14px;width:54px;height:54px}}
+
+/* ---------- phones: tighter rhythm, 44px+ tap targets, full-width actions ---------- */
+@media(max-width:600px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  .pad{padding:68px 0}
+  h2{font-size:clamp(30px,8.6vw,38px)}
+  .marquee div{font-size:20px;gap:36px}.marquee span::after{margin-right:36px}
+  .intro .grid,.cov .two,.eco .top,.kids .two,.join .grid{gap:34px}
+  .intro p.big{font-size:22px}
+  .stats{gap:10px;margin-top:28px}.stat{padding:16px 8px}.stat b{font-size:40px}.stat span{font-size:13px}
+  .pillars .sub{margin-bottom:36px}.pc{padding:24px 22px}.pc h3{font-size:26px}.pcards{gap:14px}
+  .quote{margin-top:44px}
+  .qs li{padding:12px 14px;font-size:15.5px;min-height:56px}
+  .orbit{max-width:330px}
+  .opts{margin-top:44px;gap:12px}.opt{padding:18px 20px}
+  .eco .closing{font-size:23px;margin-top:34px}
+  .chips span{padding:9px 16px;font-size:15px}
+  .tl{padding-right:62px}.tl::before,.tl .fill{right:21px}
+  .st .dot{right:-62px;width:46px;height:46px;font-size:19px}.st h3{font-size:25px}.st p{font-size:16px}.st{padding-bottom:34px}
+  .plan .sub{margin-bottom:44px}
+  .cloud-chips{gap:9px}.cloud-chips span{padding:10px 16px;font-size:15px}
+  .who .welcome{font-size:18px}
+  .out .grid{gap:12px;margin-top:30px}.oc{min-height:150px;padding:20px 16px}.oc b{font-size:90px}.oc p{font-size:15.5px}
+  .uh .tag{font-size:23px}
+  .details div{flex-direction:column;gap:2px}.details b{flex:none}
+  .wa-btn{width:100%;justify-content:center}
+  .card{padding:24px 18px;border-radius:22px}
+  .q{font-size:24px}
+  .fld input,.fld textarea{font-size:16px;padding:14px}      /* 16px stops iOS zooming the page on focus */
+  .opts2 label{padding:12px 16px;min-height:46px}
+  .nav2{flex-direction:row-reverse;gap:8px}.nav2 .btn{flex:1;justify-content:center;padding:16px 20px}
+  .nav2 .bk{padding:14px 10px}
+  .row2.nums{grid-template-columns:1fr 1fr!important}
+  nav .logo{padding:8px 0}
+  .wa{transition:bottom .3s var(--out),transform .2s var(--out)}
+  body.nobar .wa{bottom:calc(16px + env(safe-area-inset-bottom))}
+  .btn{padding:16px 26px}
+  .mcta{bottom:calc(14px + env(safe-area-inset-bottom))}
+  .wa{bottom:calc(84px + env(safe-area-inset-bottom))}
+  body footer{padding:36px 20px 110px}
+}
 footer{background:#0f140d;color:#9aa58b;text-align:center;padding:40px 20px;font-size:14px}
 footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;margin-bottom:6px}
 
@@ -602,7 +644,7 @@ footer b{color:var(--sand);font:700 20px 'Frank Ruhl Libre',serif;display:block;
           <div class="fld"><label for="phone">טלפון</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" style="text-align:right" required><div class="em">מספר טלפון תקין, בבקשה</div></div>
           <div class="fld"><label for="email">אימייל (לא חובה)</label><input id="email" name="email" type="email" autocomplete="email" dir="ltr" style="text-align:right"><div class="em">נראה שהכתובת לא שלמה</div></div>
         </div>
-        <div class="row2">
+        <div class="row2 nums">
           <div class="fld"><label for="adults">כמה מבוגרים מגיעים?</label><input id="adults" name="adults" type="number" min="1" max="20" value="1" inputmode="numeric"></div>
           <div class="fld"><label for="kids">כמה ילדים?</label><input id="kids" name="kids" type="number" min="0" max="20" value="0" inputmode="numeric"></div>
         </div>
@@ -727,6 +769,7 @@ function onScroll(){
   if(!reduce&&y<1100)par.forEach(g=>g.style.transform=`translateY(${y*+g.dataset.par*.5}px)`);
   const jr=join.getBoundingClientRect();
   mcta.classList.toggle('show',y>500&&!(jr.top<innerHeight&&jr.bottom>0));
+  document.body.classList.toggle('nobar',!mcta.classList.contains('show'));
   const r=tl.getBoundingClientRect(),vh=innerHeight;
   const p=Math.min(1,Math.max(0,(vh*.6-r.top)/r.height));
   fill.style.setProperty('--p',(p*100)+'%');
@@ -785,7 +828,7 @@ async function submit(){
   const fd=new FormData(f);if(fd.get('website'))return;        // honeypot
   const data={};
   for(const k of new Set(fd.keys())){if(k==='website')continue;const v=fd.getAll(k);data[k]=v.length>1?v:v[0]}
-  nextB.disabled=true;nextB.style.opacity=.6;
+  nextB.disabled=true;nextB.style.opacity=.6;nextB.firstChild.textContent='שולח… ';
   try{
     await window.REG.send(data);
     f.hidden=true;$('#dn').textContent=(data.name||'').split(' ')[0];$('#done').hidden=false;
@@ -823,12 +866,14 @@ window.REG={async send(data){
   for(const k in data){const v=Array.isArray(data[k])?data[k].join(', '):data[k];if(v!==''){readable[HE[k]||k]=v;lines.push(`${HE[k]||k}: ${v}`)}}
   let sent=false;
   try{
-    const r=await fetch('https://formsubmit.co/ajax/'+MAIL_TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);       // never leave the visitor waiting
+    const r=await fetch('https://formsubmit.co/ajax/'+MAIL_TO,{signal:ac.signal,method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
       body:JSON.stringify({_subject:'הרשמה חדשה למפגש יבנאל: '+(data.name||''),_cc:MAIL_CC,_template:'table',_captcha:'false',...readable})});
     const j=await r.json().catch(()=>({}));
     sent=r.ok&&String(j.success)!=='false';
+    clearTimeout(to);
     if(!sent)console.warn('FormSubmit replied:',j);
-  }catch(e){console.warn('send failed',e)}
+  }catch(e){console.warn('send failed or timed out',e)}
   const msgEl=$('#doneMsg'),btn=$('#mailBtn');
   if(sent){msgEl.innerHTML='קיבלנו את ההרשמה. נחזור אליך עם כל הפרטים.<br>נתראה ביבנאל.';btn.hidden=true}
   else{
