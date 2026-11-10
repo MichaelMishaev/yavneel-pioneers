@@ -33,9 +33,17 @@ as $$ select exists (select 1 from public.admins where uid = auth.uid()) $$;
 revoke all on function public.is_admin() from public;
 grant execute on function public.is_admin() to anon, authenticated;
 
+drop policy if exists "anyone reads details" on public.site_details;
+drop policy if exists "admin writes details" on public.site_details;
+drop policy if exists "anyone registers" on public.registrations;
+drop policy if exists "admin reads registrations" on public.registrations;
+
 create policy "anyone reads details" on public.site_details for select using (true);
 create policy "admin writes details" on public.site_details for all
   using (public.is_admin()) with check (public.is_admin());
 
 create policy "anyone registers" on public.registrations for insert with check (true);
 create policy "admin reads registrations" on public.registrations for select using (public.is_admin());
+
+-- Check: only is_admin()-based policies should be listed for the admin rules.
+-- select tablename, policyname, cmd, qual from pg_policies where schemaname='public';
